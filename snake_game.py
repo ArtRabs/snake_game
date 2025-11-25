@@ -49,6 +49,15 @@ while True:
         snake.insert(0, head) # add new head
         snake.pop() # remove tail
 
+        # Check if snake eats food
+        snake.insert(0, head)
+        if snake[0] == food:
+            # Don’t remove tail → snake grows
+            food = (random.randrange(0, WIDTH, CELL_SIZE),
+            random.randrange(0, HEIGHT, CELL_SIZE))
+        else:
+            snake.pop()
+
     # Fill the screen with black
     screen.fill((0, 0, 0))
 
@@ -58,6 +67,8 @@ while True:
 
     # Draw the food
     pygame.draw.rect(screen, (255, 0, 0), (*food, CELL_SIZE, CELL_SIZE))
+
+    
 
     # Refresh display
     pygame.display.flip()  
