@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys, random
 
 pygame.init()
 
@@ -16,6 +16,9 @@ clock = pygame.time.Clock()
 # Snake setup (just a few blocks to start)
 snake = [(100, 100), (80, 100), (60, 100)] # starting body position
 direction = (CELL_SIZE, 0) # moving right 20 pixels each frame
+
+# Food setup
+food = (random.randrange(0, WIDTH, CELL_SIZE), random.randrange(0, HEIGHT, CELL_SIZE))
 
 # Main game loop
 while True:  
@@ -52,6 +55,9 @@ while True:
     # Draw the snake
     for segment in snake:
         pygame.draw.rect(screen, (0, 255, 0), (segment[0], segment[1], CELL_SIZE, CELL_SIZE))
+
+    # Draw the food
+    pygame.draw.rect(screen, (255, 0, 0), (*food, CELL_SIZE, CELL_SIZE))
 
     # Refresh display
     pygame.display.flip()  
