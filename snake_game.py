@@ -49,6 +49,16 @@ while True:
         snake.insert(0, head) # add new head
         snake.pop() # remove tail
 
+        # Wall collision
+        if head[0] < 0 or head[0] >= WIDTH or head[1] < 0 or head[1] >= HEIGHT:
+            pygame.quit()
+            sys.exit()
+
+        # Snake collision
+        if head in snake[1:]:
+            pygame.quit()
+            sys.exit()
+
         # Check if snake eats food
         snake.insert(0, head)
         if snake[0] == food:
