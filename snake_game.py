@@ -47,7 +47,6 @@ while True:
         # Move Snake
         head = (snake[0][0] + direction[0], snake[0][1] + direction[1])
         snake.insert(0, head) # add new head
-        snake.pop() # remove tail
 
         # Wall collision
         if head[0] < 0 or head[0] >= WIDTH or head[1] < 0 or head[1] >= HEIGHT:
@@ -60,7 +59,6 @@ while True:
             sys.exit()
 
         # Check if snake eats food
-        snake.insert(0, head)
         if snake[0] == food:
             # Don’t remove tail → snake grows
             food = (random.randrange(0, WIDTH, CELL_SIZE),
