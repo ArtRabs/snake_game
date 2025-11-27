@@ -20,6 +20,25 @@ direction = (CELL_SIZE, 0) # moving right 20 pixels each frame
 # Food setup
 food = (random.randrange(0, WIDTH, CELL_SIZE), random.randrange(0, HEIGHT, CELL_SIZE))
 
+def game_over_screen():
+    font = pygame.font.SysFont(None, 48)
+    text = font.render(f"Game Over!", True, (255, 255, 255))
+
+    screen.fill((0, 0, 0))
+    screen.blit(text, (WIDTH // 2 - text.get_width() // 2, HEIGHT // 3))
+    
+    pygame.display.flip()  
+
+    # Wait for user input
+    while True:
+
+        for event in pygame.event.get():
+            
+            if event.type == pygame.QUIT:
+
+                pygame.quit()
+                sys.exit()
+
 # Main game loop
 while True:  
     # Event loop
@@ -50,11 +69,13 @@ while True:
 
         # Wall collision
         if head[0] < 0 or head[0] >= WIDTH or head[1] < 0 or head[1] >= HEIGHT:
+            game_over_screen()
             pygame.quit()
             sys.exit()
 
         # Snake collision
         if head in snake[1:]:
+            game_over_screen()
             pygame.quit()
             sys.exit()
 
